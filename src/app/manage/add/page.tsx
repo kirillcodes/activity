@@ -24,6 +24,7 @@ export default function Add() {
 
   return (
     <div>
+      <p className="text-xl mb-3">Task name:</p>
       <Input
         type="text"
         name="activity-name"
@@ -31,13 +32,14 @@ export default function Add() {
         value={name}
         onChange={(e) => handleInput(e)}
       />
-      <div className="flex justify-between gap-5 my-5">
+      <div className="flex justify-center sm:justify-between flex-wrap gap-5 my-5">
         {days.map((day, index) => (
           <Button
             name={day}
             key={index}
             checked={selectedDays.includes(day)}
             onClick={() => toggleDay(day)}
+            style={{ width: 80 }}
           />
         ))}
       </div>
