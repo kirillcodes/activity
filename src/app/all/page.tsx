@@ -1,7 +1,7 @@
 import { Board } from "@/components";
 import { Timer } from "@/components/Timer";
 
-export default function Dashboard() {
+export default function All() {
   return (
     <div>
       <Timer />

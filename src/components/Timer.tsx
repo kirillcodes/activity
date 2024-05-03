@@ -23,13 +23,14 @@ export const Timer: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       updateTimer();
-    }, 1000);
+    }, 10000);
     return () => clearInterval(interval);
   }, [updateTimer]);
 
   useEffect(() => {
     getDate();
-  }, [getDate]);
+    updateTimer();
+  }, [getDate, updateTimer]);
 
   return (
     <div className="text-center">
