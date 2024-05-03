@@ -1,9 +1,12 @@
-import { ActivityItem } from "@/components";
+import { ActivityItem, Button } from "@/components";
+import Link from "next/link";
 
 export default function Manage() {
   return (
     <div>
-      <button className="w-full h-10 bg-gray-100 rounded-md text-2xl">+</button>
+      <Link href="/manage/add">
+        <Button name="+" />
+      </Link>{" "}
       <div>
         <ActivityItem
           name="Algo's"
