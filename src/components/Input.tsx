@@ -1,7 +1,7 @@
 import { CSSProperties, ChangeEvent } from "react";
 
 type Props = {
-  type?: "text" | "password";
+  type?: "text" | "email" | "password";
   name: string;
   placeholder: string;
   value: string;

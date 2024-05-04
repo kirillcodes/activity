@@ -5,3 +5,6 @@ export { Timer } from "./Timer";
 export { ActivityItem } from "./ActivityItem";
 export { Input } from "./Input";
 export { Button } from "./Button";
+export { Form } from "./Form";
+export { SignIn } from "./SignIn";
+export { SignUp } from "./SignUp";
