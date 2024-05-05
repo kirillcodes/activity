@@ -16,16 +16,22 @@ export const SignIn = () => {
   const handleLogin = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        user.getIdToken().then((token) => {
-          dispatch(
-            setUser({
-              id: user.uid,
-              token: token,
-              email: user.email,
-            }),
+        if (user && user.emailVerified) {
+          user.getIdToken().then((token) => {
+            dispatch(
+              setUser({
+                id: user.uid,
+                token: token,
+                email: user.email,
+              }),
+            );
+            route.push("/all");
+          });
+        } else {
+          setError(
+            "Account registration has not been confirmed. Please check your email",
           );
-          route.push("/all");
-        });
+        }
       })
       .catch(() => {
         setError("Wrong login or password");
