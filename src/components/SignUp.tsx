@@ -6,9 +6,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/store/slices/userSlice";
 import { auth } from "@/app/firebase";
+import { useRouter } from "next/navigation";
 
 export const SignUp = () => {
   const dispatch = useDispatch();
+  const route = useRouter();
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = (email: string, password: string) => {
@@ -22,18 +24,18 @@ export const SignUp = () => {
               email: user.email,
             }),
           );
+          route.push("/all");
         });
       })
-      .catch((error: any) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
+      .catch(() => {
+        setError("Invalid user");
       });
   };
 
   return (
     <div>
-      {!!error && <p>{error}</p>}
-      <Form title="Sign up" handleSubmit={handleLogin} />
+      <Form title="Sign Up" handleSubmit={handleLogin} />
+      {!!error && <p className="text-center mt-2">[ {error} ]</p>}
     </div>
   );
 };

@@ -23,7 +23,7 @@ export const Form: React.FC<Props> = ({ title, handleSubmit }) => {
 
   return (
     <div>
-      <h2>{title}</h2>
+      <h2 className="text-center mb-2">{title}</h2>
       <Input
         type="email"
         name="email"

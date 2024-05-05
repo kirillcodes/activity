@@ -6,16 +6,17 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/store/slices/userSlice";
 import { auth } from "@/app/firebase";
+import { useRouter } from "next/navigation";
 
 export const SignIn = () => {
   const dispatch = useDispatch();
+  const route = useRouter();
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = (email: string, password: string) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         user.getIdToken().then((token) => {
-          console.log(user, token);
           dispatch(
             setUser({
               id: user.uid,
@@ -23,18 +24,18 @@ export const SignIn = () => {
               email: user.email,
             }),
           );
+          route.push("/all");
         });
       })
-      .catch((error: any) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
+      .catch(() => {
+        setError("Wrong login or password");
       });
   };
 
   return (
     <div>
-      {!!error && <p>{error}</p>}
-      <Form title="Sign in" handleSubmit={handleLogin} />
+      <Form title="Sign In" handleSubmit={handleLogin} />
+      {!!error && <p className="text-center mt-2 text-red-500">[ {error} ]</p>}
     </div>
   );
 };
